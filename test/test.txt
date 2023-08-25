@@ -1,0 +1,47 @@
+if (true) {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    DataManager dataManager = DataManager();
+    await dataManager.initialize("testUser");
+
+    await dataManager.refreshUser();
+
+    User newUser = User("test2", [30000], [1002, 20000]);
+
+    await dataManager.uploadUser(newUser);
+
+    await dataManager.likeRecipe(30000);
+
+    print(dataManager.isLikeRecipe(30000));
+
+    await dataManager.dislikeRecipe(30000);
+
+    print(dataManager.isLikeRecipe(30000));
+
+    print(await dataManager.getNextRecipeNumber());
+
+    print(await dataManager.getUser("test2"));
+
+    print(await dataManager.getCalories());
+
+    print(await dataManager.getBaseRecipes());
+
+    print(await dataManager.getCustomRecipe(30000));
+
+    print(await dataManager.loadTopRecipe(3));
+
+    print(await dataManager.loadLikeRecipes());
+
+    Activity activity = Activity(Ingredient.chicken, 100, ActivityType.frying, "30m", null, Condiment.flour);
+
+    print(activity);
+
+    print(activity.toMap());
+
+    print(Activity.fromMap(activity.toMap()));
+
+    Recipe newRecipe = Recipe(30000, "test3", "desc3", "test2", [activity], 393);
+
+    print(Recipe.fromMap(newRecipe.toMap()));
+
+    await dataManager.uploadRecipe(newRecipe);
+  }
